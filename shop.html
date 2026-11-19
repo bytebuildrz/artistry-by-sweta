@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Shop — Artistry by Sweta J</title>
+<meta name="description" content="Shop handmade concrete decor, candles, keepsakes, DIY kits and hampers by Sweta J, Bangalore. Order on WhatsApp.">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500;1,600&family=Archivo:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css"><link rel="icon" href="data:,"></head>
+<body>
+<div class="sample-bar"><div class="wrap"><strong>Sample website by ByteBuildrz</strong><span>Sample photos and prices · final site carries her real catalogue</span></div></div>
+<header class="site"><div class="wrap header-in">
+<a class="brand" href="index.html"><span class="brand-name">Artistry by Sweta J</span><span class="brand-sub">Concrete · Candles · Gifting</span></a>
+<nav class="header-nav"><a href="index.html">Home</a><a href="shop.html">Shop</a><a href="index.html#bulk">Bulk Orders</a><a href="index.html#faq">FAQ</a></nav>
+<div><button class="icon-btn" data-open-bag>Bag<span class="badge bag-count" hidden>0</span></button></div>
+</div></header>
+
+<div class="wrap" style="padding-top:26px">
+<span class="eyebrow">The Collection</span>
+<h1 style="font-family:'Cormorant Garamond',serif;font-size:38px;margin:8px 0 6px">Every piece, ready to order</h1>
+<p style="color:var(--muted);max-width:60ch;margin:0 0 18px">No more messaging to ask about each piece. See it, read the details, add it to your bag, and message Sweta ready to order.</p>
+<div class="search-row"><input id="q" type="search" placeholder="Search candles, trays, frames, hampers…"></div>
+<div class="filters" id="filters">
+<button class="chip on" data-cat="all">All</button>
+<button class="chip" data-cat="decor">Concrete Decor</button>
+<button class="chip" data-cat="candles">Candles</button>
+<button class="chip" data-cat="keepsakes">Keepsakes & Frames</button>
+<button class="chip" data-cat="hampers">Hampers & Gifting</button>
+<button class="chip" data-cat="kits">DIY Kits</button>
+</div>
+<div class="grid" id="grid"></div>
+<p id="empty" style="color:var(--muted)" hidden>No pieces match that search yet. Try another word, or ask Sweta on WhatsApp, she makes custom pieces too.</p>
+</div>
+
+<footer class="site"><div class="wrap">
+<span class="brand-name">Artistry by Sweta J</span>
+<p>Handmade concrete decor, candles and gifting · Bangalore · Bulk, event & corporate orders on WhatsApp.</p>
+<div class="foot-row"><a href="https://www.instagram.com/artistrybyswetaj/" target="_blank" rel="noopener">Instagram @artistrybyswetaj</a><a href="https://wa.me/message/2573WXVL3QJUO1" target="_blank" rel="noopener">WhatsApp</a><a href="index.html">Home</a><a href="admin.html">Admin</a></div>
+<p class="copy">Sample website made by ByteBuildrz. Sample photos and prices; final prices are hers.</p>
+</div></footer>
+
+<button class="float-bag" hidden>🛍 <span>Bag</span></button>
+<div class="drawer"><div class="drawer-bg"></div><div class="drawer-panel">
+<h3>Your Bag</h3><p style="color:var(--muted);margin:0 0 6px">Review, then send your order on WhatsApp.</p>
+<div class="bag-items"></div>
+<div class="field"><label for="cust-name">Your name</label><input id="cust-name" placeholder="e.g. Priya Sharma"></div>
+<div class="field"><label for="cust-city">City</label><input id="cust-city" placeholder="e.g. Bangalore"></div>
+<div class="total-row"><span>Total</span><span class="bag-total">₹0</span></div>
+<button class="btn wa" style="width:100%" onclick="ARTsendOrder()">Send Order on WhatsApp</button>
+<button class="btn ghost" style="width:100%;margin-top:8px" data-close-bag>Continue shopping</button>
+</div></div>
+
+<script src="store.js"></script><script src="app.js"></script>
+<script>
+var cat=new URLSearchParams(location.search).get("cat")||"all";var q="";
+function render(){var list=ARTproducts().filter(function(p){return (cat==="all"||p.cat===cat)&&(!q||(p.name+" "+p.catLabel+" "+p.desc).toLowerCase().indexOf(q)>-1);});
+document.getElementById("grid").innerHTML=list.map(ARTcard).join("");document.getElementById("empty").hidden=list.length>0;
+document.querySelectorAll("#filters .chip").forEach(function(c){c.classList.toggle("on",c.getAttribute("data-cat")===cat);});}
+document.getElementById("filters").addEventListener("click",function(e){var c=e.target.closest("[data-cat]");if(!c)return;cat=c.getAttribute("data-cat");render();});
+document.getElementById("q").addEventListener("input",function(e){q=e.target.value.trim().toLowerCase();render();});
+render();ARTrenderBag();
+</script>
+</body></html>

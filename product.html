@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Piece — Artistry by Sweta J</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500;1,600&family=Archivo:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css"><link rel="icon" href="data:,"></head>
+<body>
+<div class="sample-bar"><div class="wrap"><strong>Sample website by ByteBuildrz</strong><span>Sample photo and price · final site carries her real catalogue</span></div></div>
+<header class="site"><div class="wrap header-in">
+<a class="brand" href="index.html"><span class="brand-name">Artistry by Sweta J</span><span class="brand-sub">Concrete · Candles · Gifting</span></a>
+<nav class="header-nav"><a href="index.html">Home</a><a href="shop.html">Shop</a><a href="index.html#bulk">Bulk Orders</a></nav>
+<div><button class="icon-btn" data-open-bag>Bag<span class="badge bag-count" hidden>0</span></button></div>
+</div></header>
+
+<div class="wrap" style="padding-top:24px"><a href="shop.html" style="font-weight:700;color:var(--accent);font-size:14px">← Back to shop</a>
+<div class="pd" id="pd" style="margin-top:14px"></div>
+<section style="padding-top:36px"><div class="sec-head"><h2>You may also like</h2><a href="shop.html">See all →</a></div><div class="grid" id="more"></div></section>
+</div>
+
+<footer class="site"><div class="wrap">
+<span class="brand-name">Artistry by Sweta J</span>
+<p>Handmade in Bangalore · Bulk, event & corporate orders on WhatsApp.</p>
+<div class="foot-row"><a href="https://www.instagram.com/artistrybyswetaj/" target="_blank" rel="noopener">Instagram @artistrybyswetaj</a><a href="https://wa.me/message/2573WXVL3QJUO1" target="_blank" rel="noopener">WhatsApp</a><a href="shop.html">Shop</a></div>
+<p class="copy">Sample website made by ByteBuildrz.</p>
+</div></footer>
+
+<button class="float-bag" hidden>🛍 <span>Bag</span></button>
+<div class="drawer"><div class="drawer-bg"></div><div class="drawer-panel">
+<h3>Your Bag</h3><p style="color:var(--muted);margin:0 0 6px">Review, then send your order on WhatsApp.</p>
+<div class="bag-items"></div>
+<div class="field"><label for="cust-name">Your name</label><input id="cust-name" placeholder="e.g. Priya Sharma"></div>
+<div class="field"><label for="cust-city">City</label><input id="cust-city" placeholder="e.g. Bangalore"></div>
+<div class="total-row"><span>Total</span><span class="bag-total">₹0</span></div>
+<button class="btn wa" style="width:100%" onclick="ARTsendOrder()">Send Order on WhatsApp</button>
+<button class="btn ghost" style="width:100%;margin-top:8px" data-close-bag>Continue shopping</button>
+</div></div>
+
+<script src="store.js"></script><script src="app.js"></script>
+<script>
+var id=Number(new URLSearchParams(location.search).get("id")||1);var p=ARTbyId(id)||ARTproducts()[0];
+document.title=p.name+" — Artistry by Sweta J";
+document.getElementById("pd").innerHTML='<div><img class="main" src="'+p.img+'" alt="'+ARTesc(p.alt)+'"></div><div><span class="card-cat">'+ARTesc(p.catLabel)+'</span><h1>'+ARTesc(p.name)+'</h1><div class="price">'+ARTfmt(p.price)+' <small style="color:var(--faint);font-size:13px;font-weight:600">sample price</small></div><p class="desc">'+ARTesc(p.desc)+'</p><p class="desc"><strong style="color:var(--ink)">Details:</strong> '+ARTesc(p.detail)+'. Handmade to order in Bangalore; most pieces ready in 4-5 days. Delivery is confirmed on WhatsApp before dispatch.</p><div style="display:flex;gap:10px;flex-wrap:wrap;margin-top:16px"><button class="btn" data-add="'+p.id+'">Add to Bag</button><a class="btn wa" target="_blank" rel="noopener" href="https://wa.me/919244632644?text='+encodeURIComponent("Hi Sweta, I want to order: "+p.name+" ("+ARTfmt(p.price)+"). Please confirm availability.")+'">Order on WhatsApp</a></div><p style="color:var(--muted);font-size:13.5px;margin-top:14px">Want it customised, or in bulk for an event? Message Sweta on WhatsApp or Instagram @artistrybyswetaj.</p></div>';
+document.getElementById("more").innerHTML=ARTproducts().filter(function(x){return x.id!==p.id;}).slice(0,3).map(ARTcard).join("");
+ARTrenderBag();
+</script>
+</body></html>

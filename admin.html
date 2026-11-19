@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Admin — Artistry by Sweta J</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500;1,600&family=Archivo:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css"><link rel="icon" href="data:,">
+<style>.stat{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius-lg);padding:16px}.stat b{font-size:26px;display:block}.stat span{color:var(--muted);font-size:13px}.stats{display:grid;grid-template-columns:1fr 1fr;gap:12px}@media(min-width:760px){.stats{grid-template-columns:repeat(4,1fr)}}table{width:100%;border-collapse:collapse;background:var(--surface);border:1px solid var(--line);border-radius:var(--radius-lg);overflow:hidden}th,td{padding:10px 12px;text-align:left;font-size:13.5px;border-bottom:1px solid var(--line)}th{background:var(--rose-soft);color:var(--accent-deep)}td input{width:90px;border:1px solid var(--line2);border-radius:8px;padding:7px;min-height:36px}.pill-s{display:inline-block;padding:3px 9px;border-radius:999px;background:var(--rose-soft);color:var(--accent-deep);font-weight:700;font-size:12px}</style></head>
+<body>
+<div class="sample-bar"><div class="wrap"><strong>Admin demo · ByteBuildrz sample</strong><span>Demo data saves in this browser only</span></div></div>
+<header class="site"><div class="wrap header-in">
+<a class="brand" href="index.html"><span class="brand-name">Artistry by Sweta J</span><span class="brand-sub">Admin Dashboard</span></a>
+<div><a class="icon-btn" href="index.html">View Site</a></div>
+</div></header>
+
+<div class="wrap" id="login" style="max-width:420px;padding-top:36px">
+<h1 style="font-family:'Cormorant Garamond',serif;font-size:32px;margin:0 0 6px">Seller login</h1>
+<p style="color:var(--muted)">This is the dashboard Sweta gets with the full website: add, edit and hide pieces, change prices, and see every enquiry in one place.</p>
+<div class="field"><label>Email</label><input id="em" value="admin@artistry.in"></div>
+<div class="field"><label>Password</label><input id="pw" type="password" value="sweta2026"></div>
+<button class="btn" style="width:100%" onclick="login()">Login to Dashboard</button>
+<p style="color:var(--muted);font-size:13px">Demo login: admin@artistry.in / sweta2026</p>
+<p id="err" style="color:#9C2B1B;font-weight:700" hidden>Wrong password for this demo. Use sweta2026.</p>
+</div>
+
+<div class="wrap" id="dash" hidden style="padding-top:26px">
+<div class="sec-head"><h2>Dashboard</h2><button class="btn ghost" onclick="logout()">Logout</button></div>
+<div class="stats">
+<div class="stat"><b id="st-products">–</b><span>Pieces live</span></div>
+<div class="stat"><b id="st-orders">–</b><span>Enquiries</span></div>
+<div class="stat"><b id="st-value">–</b><span>Enquiry value</span></div>
+<div class="stat"><b id="st-new">–</b><span>New enquiries</span></div>
+</div>
+
+<section><div class="sec-head"><h2>Recent enquiries</h2></div><div style="overflow:auto"><table><thead><tr><th>ID</th><th>Buyer</th><th>Items</th><th>Total</th><th>Status</th></tr></thead><tbody id="orders"></tbody></table></div>
+<p style="color:var(--muted);font-size:13px">Statuses: New → Confirmed → Packed → Delivered. In the full website she updates these herself, no developer needed.</p></section>
+
+<section><div class="sec-head"><h2>Pieces & prices</h2><button class="btn ghost" onclick="resetDemo()">Reset demo data</button></div>
+<div style="overflow:auto"><table><thead><tr><th>Piece</th><th>Category</th><th>Price (₹)</th><th>Visible</th></tr></thead><tbody id="prods"></tbody></table></div>
+<p style="color:var(--muted);font-size:13px">Change a price or hide a piece, it saves instantly and the shop updates. Sample prices here; her real prices go in on the live site.</p></section>
+</div>
+
+<footer class="site"><div class="wrap"><span class="brand-name">Artistry by Sweta J</span><p class="copy">Admin demo by ByteBuildrz. Demo only: data lives in this browser.</p></div></footer>
+<script src="store.js"></script>
+<script>
+var STATUSES=["New","Confirmed","Packed","Delivered"];
+function inr(n){return "₹"+Number(n).toLocaleString("en-IN");}
+function login(){var pw=document.getElementById("pw").value;if(pw!==(ARTStore.state.adminPass||"sweta2026")){document.getElementById("err").hidden=false;return;}sessionStorage.setItem("art_admin","1");show();}
+function logout(){sessionStorage.removeItem("art_admin");location.reload();}
+function resetDemo(){ARTStore.reset();render();alert("Demo data reset.");}
+function show(){document.getElementById("login").hidden=true;document.getElementById("dash").hidden=false;render();}
+function render(){var s=ARTStore.state;
+document.getElementById("st-products").textContent=s.products.filter(function(p){return p.visible!==false;}).length;
+document.getElementById("st-orders").textContent=s.orders.length;
+document.getElementById("st-value").textContent=inr(s.orders.reduce(function(a,o){return a+o.total;},0));
+document.getElementById("st-new").textContent=s.orders.filter(function(o){return o.status===0;}).length;
+document.getElementById("orders").innerHTML=s.orders.slice().reverse().map(function(o){return "<tr><td>"+o.id+"</td><td>"+o.who+"</td><td>"+o.item+"</td><td>"+inr(o.total)+"</td><td><span class='pill-s'>"+(STATUSES[o.status]||"New")+"</span></td></tr>";}).join("");
+document.getElementById("prods").innerHTML=s.products.map(function(p,i){return "<tr><td><strong>"+p.name+"</strong></td><td>"+p.catLabel+"</td><td><input type='number' value='"+p.price+"' onchange='setPrice("+i+",this.value)'></td><td><input type='checkbox' "+(p.visible!==false?"checked":"")+" onchange='setVis("+i+",this.checked)' style='width:20px;height:20px'></td></tr>";}).join("");}
+function setPrice(i,v){ARTStore.state.products[i].price=Math.max(0,parseInt(v,10)||0);ARTStore.save();render();}
+function setVis(i,v){ARTStore.state.products[i].visible=v;ARTStore.save();render();}
+if(sessionStorage.getItem("art_admin")==="1")show();
+</script>
+</body></html>
