@@ -38,3 +38,11 @@ window.open("https://wa.me/"+WA+"?text="+encodeURIComponent(msg),"_blank");}
 window.ARTsendOrder=sendOrder;
 document.addEventListener("DOMContentLoaded",renderBag);
 })();
+
+/* Reveal motion (design system: one entrance, JS-set initial state so no-JS keeps content visible) */
+(function(){if(!("IntersectionObserver" in window))return;var els=[];function collect(){document.querySelectorAll("section,.card,.notes figure,.index-list a,.step,.banner,.hero-img").forEach(function(e){if(!e.dataset.rv){e.dataset.rv="1";e.classList.add("rv-init");els.push(e);}});}
+var io=new IntersectionObserver(function(es){es.forEach(function(en){if(en.isIntersecting){en.target.classList.add("rv-in");io.unobserve(en.target);}});},{threshold:.08});
+function init(){collect();els.forEach(function(e,i){e.style.transitionDelay=(Math.min(i%4,3)*70)+"ms";io.observe(e);});}
+if(document.readyState==="loading"){document.addEventListener("DOMContentLoaded",init);}else{init();}
+new MutationObserver(function(){collect();els.forEach(function(e){io.observe(e);});}).observe(document.body,{childList:true,subtree:true});
+})();

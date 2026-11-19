@@ -1,6 +1,6 @@
 <!doctype html>
 <html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<title>Piece — Artistry by Sweta J</title>
+<title>Piece · Artistry by Sweta J</title>
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500;1,600&family=Archivo:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="style.css"><link rel="icon" href="data:,"></head>
@@ -38,7 +38,7 @@
 <script src="store.js"></script><script src="app.js"></script>
 <script>
 var id=Number(new URLSearchParams(location.search).get("id")||1);var p=ARTbyId(id)||ARTproducts()[0];
-document.title=p.name+" — Artistry by Sweta J";
+document.title=p.name+" · Artistry by Sweta J";
 document.getElementById("pd").innerHTML='<div><img class="main" src="'+p.img+'" alt="'+ARTesc(p.alt)+'"></div><div><span class="card-cat">'+ARTesc(p.catLabel)+'</span><h1>'+ARTesc(p.name)+'</h1><div class="price">'+ARTfmt(p.price)+' <small style="color:var(--faint);font-size:13px;font-weight:600">sample price</small></div><p class="desc">'+ARTesc(p.desc)+'</p><p class="desc"><strong style="color:var(--ink)">Details:</strong> '+ARTesc(p.detail)+'. Handmade to order in Bangalore; most pieces ready in 4-5 days. Delivery is confirmed on WhatsApp before dispatch.</p><div style="display:flex;gap:10px;flex-wrap:wrap;margin-top:16px"><button class="btn" data-add="'+p.id+'">Add to Bag</button><a class="btn wa" target="_blank" rel="noopener" href="https://wa.me/919244632644?text='+encodeURIComponent("Hi Sweta, I want to order: "+p.name+" ("+ARTfmt(p.price)+"). Please confirm availability.")+'">Order on WhatsApp</a></div><p style="color:var(--muted);font-size:13.5px;margin-top:14px">Want it customised, or in bulk for an event? Message Sweta on WhatsApp or Instagram @artistrybyswetaj.</p></div>';
 document.getElementById("more").innerHTML=ARTproducts().filter(function(x){return x.id!==p.id;}).slice(0,3).map(ARTcard).join("");
 ARTrenderBag();
