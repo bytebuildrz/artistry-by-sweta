@@ -1,62 +1,1276 @@
 <!doctype html>
-<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<title>Admin — Artistry by Sweta J</title>
-<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500;1,600&family=Archivo:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="style.css"><link rel="icon" href="data:,">
-<style>.stat{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius-lg);padding:16px}.stat b{font-size:26px;display:block}.stat span{color:var(--muted);font-size:13px}.stats{display:grid;grid-template-columns:1fr 1fr;gap:12px}@media(min-width:760px){.stats{grid-template-columns:repeat(4,1fr)}}table{width:100%;border-collapse:collapse;background:var(--surface);border:1px solid var(--line);border-radius:var(--radius-lg);overflow:hidden}th,td{padding:10px 12px;text-align:left;font-size:13.5px;border-bottom:1px solid var(--line)}th{background:var(--rose-soft);color:var(--accent-deep)}td input{width:90px;border:1px solid var(--line2);border-radius:8px;padding:7px;min-height:36px}.pill-s{display:inline-block;padding:3px 9px;border-radius:999px;background:var(--rose-soft);color:var(--accent-deep);font-weight:700;font-size:12px}</style></head>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<meta name="color-scheme" content="light dark" />
+<link rel="icon" href="data:," />
+<title>ARTISTRY BY SWETA J — Seller Admin</title>
+<meta name="description" content="ARTISTRY BY SWETA J Seller Admin Dashboard." />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500;1,600;1,700&family=Archivo:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+<style>
+  :root {
+    --bg: #FAF7F2;
+    --panel: #F3ECE1;
+    --panel-warm: #EFE6D8;
+    --surface: #FFFFFF;
+    --ink: #22160E;
+    --ink-light: #3D2C1E;
+    --muted: #6B5646;
+    --faint: #968371;
+    --line: rgba(62, 38, 20, 0.12);
+    --line-strong: rgba(62, 38, 20, 0.24);
+    --accent: #9E4D12;
+    --accent-deep: #783808;
+    --accent-hover: #833D0B;
+    --accent-ink: #FFF8EE;
+    --accent-soft: rgba(158, 77, 18, 0.08);
+    --gold: #AD7F36;
+    --gold-deep: #8E6523;
+    --gold-soft: rgba(173, 127, 54, 0.12);
+    --gold-border: rgba(173, 127, 54, 0.32);
+    --wa: #9E4D12;
+    --wa-hover: #783808;
+    --wa-ink: #FFF8EE;
+    --danger: #9C2B1B;
+    --danger-bg: #FDEDEB;
+    --danger-border: #F5C2BC;
+    --radius: 8px;
+    --radius-lg: 14px;
+    --radius-pill: 999px;
+    --shadow-sm: 0 2px 8px rgba(34, 22, 14, 0.04);
+    --shadow-md: 0 8px 24px rgba(34, 22, 14, 0.08);
+    --shadow-lg: 0 16px 44px rgba(34, 22, 14, 0.12);
+    --ease: cubic-bezier(.2,.6,.2,1);
+    --dur: .2s;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #150E08;
+      --panel: #201710;
+      --panel-warm: #261D15;
+      --surface: #1E150D;
+      --ink: #F8EFE4;
+      --ink-light: #E7D8C6;
+      --muted: #C4AD97;
+      --faint: #988370;
+      --line: rgba(230, 205, 175, 0.12);
+      --line-strong: rgba(230, 205, 175, 0.24);
+      --accent: #DF9B52;
+      --accent-deep: #C7833B;
+      --accent-hover: #EEA960;
+      --accent-ink: #1C1106;
+      --accent-soft: rgba(223, 155, 82, 0.12);
+      --gold: #DFB768;
+      --gold-deep: #C49E4F;
+      --gold-soft: rgba(223, 183, 104, 0.14);
+      --gold-border: rgba(223, 183, 104, 0.35);
+      --wa: #DF9B52;
+      --wa-hover: #EEA960;
+      --wa-ink: #1C1106;
+      --danger: #E88A76;
+      --danger-bg: #2C1410;
+      --danger-border: #5A2720;
+      --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.25);
+      --shadow-md: 0 8px 24px rgba(0, 0, 0, 0.40);
+      --shadow-lg: 0 16px 44px rgba(0, 0, 0, 0.55);
+    }
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    font-family: "Archivo", system-ui, -apple-system, sans-serif;
+    background: var(--bg);
+    color: var(--ink);
+    line-height: 1.5;
+    font-size: 15px;
+    -webkit-font-smoothing: antialiased;
+    min-height: 100vh;
+  }
+  a { color: inherit; text-decoration: none; }
+  button, input, select, textarea { font: inherit; color: var(--ink); }
+  .wrap { width: min(1080px, 100% - 32px); margin: 0 auto; }
+  
+  /* Touch target rule: 44px minimum */
+  .btn, .tab-btn, .mini-btn, .nav-link, input, select, textarea {
+    min-height: 44px;
+  }
+
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 11px 20px;
+    border-radius: var(--radius-pill);
+    font-weight: 600;
+    font-size: 14px;
+    cursor: pointer;
+    border: 1px solid transparent;
+    transition: background var(--dur) var(--ease), border-color var(--dur) var(--ease), transform .12s var(--ease);
+  }
+  .btn:active { transform: scale(.97); }
+  .btn-primary { background: var(--wa); color: var(--wa-ink); border-color: var(--wa); }
+  .btn-primary:hover { background: var(--wa-hover); }
+  .btn-quiet { background: var(--surface); color: var(--ink); border-color: var(--line-strong); }
+  .btn-quiet:hover { border-color: var(--ink); }
+  .btn-full { width: 100%; }
+
+  /* Login Card Styles (Kurties Pattern) */
+  .login-page {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    padding: 24px 16px;
+  }
+  .back-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    color: var(--muted);
+    font-size: 13.5px;
+    font-weight: 600;
+    margin-bottom: 24px;
+    transition: color var(--dur) var(--ease);
+  }
+  .back-link:hover { color: var(--ink); }
+  .login-card {
+    background: var(--surface);
+    border: 1px solid var(--line-strong);
+    border-radius: var(--radius-lg);
+    padding: 32px 24px;
+    width: 100%;
+    max-width: 440px;
+    box-shadow: var(--shadow-md);
+  }
+  .lock-circle {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    background: var(--gold-soft);
+    border: 1px solid var(--gold-border);
+    color: var(--gold-deep);
+    display: grid;
+    place-items: center;
+    margin: 0 auto 16px;
+  }
+  .lock-circle svg { width: 22px; height: 22px; }
+  .login-title {
+    font-family: "Cormorant Garamond", Georgia, serif;
+    font-size: 28px;
+    font-weight: 700;
+    text-align: center;
+    margin: 0 0 6px;
+    color: var(--ink);
+  }
+  .login-sub {
+    text-align: center;
+    font-size: 13.5px;
+    color: var(--muted);
+    margin: 0 0 20px;
+  }
+  .field { margin-bottom: 14px; text-align: left; }
+  .field label {
+    display: block;
+    font-size: 11.5px;
+    font-weight: 700;
+    letter-spacing: .06em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 6px;
+  }
+  .input-wrap { position: relative; display: flex; align-items: center; }
+  .input-wrap input {
+    width: 100%;
+    padding: 11px 14px;
+    border: 1px solid var(--line-strong);
+    background: var(--bg);
+    border-radius: var(--radius);
+    outline: none;
+    transition: border-color var(--dur) var(--ease);
+  }
+  .input-wrap input:focus { border-color: var(--accent); }
+  .eye-toggle {
+    position: absolute;
+    right: 8px;
+    background: none;
+    border: none;
+    color: var(--muted);
+    padding: 8px;
+    cursor: pointer;
+    min-height: 38px;
+    min-width: 38px;
+    display: grid;
+    place-items: center;
+  }
+  .eye-toggle:hover { color: var(--ink); }
+  .eye-toggle svg { width: 18px; height: 18px; }
+
+  /* Error Box */
+  .err-box {
+    background: var(--danger-bg);
+    border: 1px solid var(--danger-border);
+    color: var(--danger);
+    padding: 12px 14px;
+    border-radius: var(--radius);
+    font-size: 13px;
+    font-weight: 600;
+    margin-bottom: 16px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .err-box svg { width: 16px; height: 16px; flex: none; }
+
+  /* Demo Box */
+  .demo-box {
+    margin-top: 20px;
+    padding: 14px 16px;
+    background: var(--panel);
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    font-size: 12.5px;
+    color: var(--muted);
+  }
+  .demo-box strong { color: var(--ink); display: block; margin-bottom: 4px; }
+  .demo-creds { font-family: monospace; font-size: 12px; color: var(--accent-deep); margin: 4px 0 10px; }
+  .status-line {
+    margin-top: 18px;
+    text-align: center;
+    font-size: 12px;
+    color: var(--faint);
+  }
+
+  /* Dashboard Header */
+  .dash-header {
+    background: var(--surface);
+    border-bottom: 1px solid var(--line);
+    padding: 14px 0;
+    position: sticky;
+    top: 0;
+    z-index: 30;
+  }
+  .dash-head-in {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+  }
+  .brand-title {
+    font-family: "Cormorant Garamond", Georgia, serif;
+    font-size: 24px;
+    font-weight: 700;
+    letter-spacing: .12em;
+    color: var(--ink);
+  }
+  .demo-chip {
+    background: var(--gold-soft);
+    color: var(--gold-deep);
+    border: 1px solid var(--gold-border);
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: .08em;
+    padding: 4px 10px;
+    border-radius: var(--radius-pill);
+    margin-left: 10px;
+    vertical-align: middle;
+  }
+  .dash-actions { display: flex; align-items: center; gap: 8px; }
+
+  /* Dashboard Layout */
+  .dash-shell {
+    display: grid;
+    gap: 20px;
+    padding: 24px 0 60px;
+  }
+  @media (min-width: 860px) {
+    .dash-shell {
+      grid-template-columns: 220px 1fr;
+      gap: 32px;
+      align-items: start;
+    }
+  }
+
+  /* Tabs */
+  .dash-tabs {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+  }
+  @media (min-width: 860px) {
+    .dash-tabs {
+      flex-direction: column;
+      position: sticky;
+      top: 86px;
+    }
+  }
+  .tab-btn {
+    padding: 10px 16px;
+    border-radius: var(--radius-pill);
+    border: 1px solid var(--line-strong);
+    background: var(--surface);
+    color: var(--ink);
+    font-size: 13.5px;
+    font-weight: 600;
+    cursor: pointer;
+    text-align: left;
+    transition: background var(--dur) var(--ease), border-color var(--dur) var(--ease);
+  }
+  @media (min-width: 860px) {
+    .tab-btn { border-radius: var(--radius); }
+  }
+  .tab-btn:hover { border-color: var(--ink); }
+  .tab-btn.active {
+    background: var(--ink);
+    color: var(--bg);
+    border-color: var(--ink);
+  }
+
+  /* Content Panel */
+  .panel-title {
+    font-family: "Cormorant Garamond", Georgia, serif;
+    font-size: 28px;
+    font-weight: 700;
+    margin: 0 0 4px;
+    color: var(--ink);
+  }
+  .panel-sub {
+    color: var(--muted);
+    font-size: 13.5px;
+    margin: 0 0 20px;
+    line-height: 1.5;
+  }
+
+  /* Stats Grid */
+  .stat-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+  }
+  @media (min-width: 640px) {
+    .stat-grid { grid-template-columns: repeat(4, 1fr); }
+  }
+  .stat-card {
+    background: var(--panel);
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    padding: 14px 16px;
+  }
+  .stat-card b {
+    display: block;
+    font-size: 26px;
+    font-weight: 800;
+    color: var(--ink);
+    line-height: 1.1;
+  }
+  .stat-card span {
+    font-size: 12px;
+    color: var(--muted);
+    margin-top: 3px;
+    display: block;
+  }
+
+  /* Piece Rows */
+  .piece-row {
+    display: grid;
+    grid-template-columns: 56px 1fr;
+    gap: 14px;
+    padding: 14px 0;
+    border-bottom: 1px solid var(--line);
+    align-items: start;
+  }
+  .piece-row img {
+    width: 56px;
+    height: 56px;
+    object-fit: cover;
+    border-radius: var(--radius);
+    background: var(--panel);
+  }
+  .piece-info h4 {
+    font-family: "Cormorant Garamond", Georgia, serif;
+    font-size: 19px;
+    font-weight: 700;
+    margin: 0;
+    color: var(--ink);
+  }
+  .piece-meta {
+    font-size: 12.5px;
+    color: var(--muted);
+    margin: 2px 0 0;
+  }
+  .piece-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 10px;
+    align-items: center;
+  }
+  .stock-stepper {
+    display: inline-flex;
+    align-items: center;
+    border: 1px solid var(--line-strong);
+    border-radius: var(--radius-pill);
+    overflow: hidden;
+    background: var(--surface);
+    height: 38px;
+  }
+  .stock-stepper button {
+    width: 38px;
+    height: 38px;
+    border: 0;
+    background: var(--surface);
+    color: var(--ink);
+    font-size: 16px;
+    font-weight: 700;
+    cursor: pointer;
+  }
+  .stock-stepper button:active { background: var(--panel); }
+  .stock-stepper span {
+    min-width: 68px;
+    text-align: center;
+    font-size: 12.5px;
+    font-weight: 600;
+  }
+  .mini-btn {
+    border: 1px solid var(--line-strong);
+    background: var(--surface);
+    color: var(--ink);
+    border-radius: var(--radius-pill);
+    padding: 6px 14px;
+    font-size: 12.5px;
+    font-weight: 600;
+    cursor: pointer;
+  }
+  .mini-btn:hover { border-color: var(--ink); }
+  .mini-btn.sold {
+    background: var(--danger);
+    border-color: var(--danger);
+    color: #FFF3E2;
+  }
+
+  /* Forms */
+  .admin-form { display: grid; gap: 14px; max-width: 540px; }
+  .form-row { display: grid; gap: 12px; }
+  @media (min-width: 560px) {
+    .form-row { grid-template-columns: 1fr 1fr; }
+  }
+  .admin-form input, .admin-form select, .admin-form textarea {
+    width: 100%;
+    border: 1px solid var(--line-strong);
+    background: var(--surface);
+    border-radius: var(--radius);
+    padding: 10px 12px;
+    font-size: 14px;
+    outline: none;
+  }
+  .admin-form input:focus, .admin-form select:focus, .admin-form textarea:focus {
+    border-color: var(--accent);
+  }
+
+  /* Orders */
+  .order-item {
+    padding: 14px 0;
+    border-bottom: 1px solid var(--line);
+  }
+  .order-item h4 {
+    font-size: 15px;
+    font-weight: 700;
+    margin: 0;
+    color: var(--ink);
+  }
+  .order-item p {
+    font-size: 13px;
+    color: var(--muted);
+    margin: 2px 0 0;
+  }
+  .status-badge {
+    font-size: 11px;
+    font-weight: 700;
+    padding: 3px 9px;
+    border-radius: var(--radius-pill);
+    border: 1px solid currentColor;
+    color: var(--accent);
+    display: inline-block;
+  }
+
+  /* Toast Notification */
+  .toast {
+    position: fixed;
+    left: 50%;
+    bottom: 24px;
+    transform: translate(-50%, 16px);
+    background: var(--ink);
+    color: var(--bg);
+    font-size: 13.5px;
+    font-weight: 600;
+    padding: 11px 20px;
+    border-radius: var(--radius-pill);
+    z-index: 100;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity .25s var(--ease), transform .25s var(--ease);
+    box-shadow: var(--shadow-lg);
+  }
+  .toast.show {
+    opacity: 1;
+    transform: translate(-50%, 0);
+  }
+
+  .badge { font-size:11px; font-weight:700; padding:3px 9px; border-radius:var(--radius-pill); border:1px solid currentColor; display:inline-block; }
+  .badge-low { color:var(--accent); background:var(--accent-soft); }
+  .badge-out { color:var(--danger); background:var(--danger-bg); }
+  .badge-draft { color:var(--muted); background:var(--panel); }
+  .piece-ph { width:56px; height:56px; border-radius:var(--radius); background:var(--panel-warm); border:1px solid var(--line-strong); display:grid; place-items:center; font-family:"Cormorant Garamond",serif; font-weight:700; font-size:13px; color:var(--muted); text-align:center; padding:4px; }
+  .toolbar { display:flex; flex-wrap:wrap; gap:8px; align-items:center; margin-bottom:14px; }
+  .toolbar input[type="search"], .toolbar select, .toolbar input[type="number"], .toolbar input[type="text"] { border:1px solid var(--line-strong); background:var(--surface); border-radius:var(--radius); padding:9px 12px; font-size:14px; min-height:44px; }
+  .toolbar input[type="search"] { flex:1 1 180px; }
+  .bulk-bar { display:flex; flex-wrap:wrap; gap:8px; align-items:center; padding:12px 14px; background:var(--panel); border:1px solid var(--line); border-radius:var(--radius); margin-bottom:8px; font-size:13px; }
+  .bulk-bar input { width:110px; border:1px solid var(--line-strong); background:var(--surface); border-radius:var(--radius); padding:8px 10px; min-height:40px; }
+  .photo-preview { width:96px; height:96px; object-fit:cover; border-radius:var(--radius); background:var(--panel); border:1px solid var(--line); display:block; }
+  .form-err { background:var(--danger-bg); border:1px solid var(--danger-border); color:var(--danger); padding:10px 12px; border-radius:var(--radius); font-size:13px; font-weight:600; display:none; }
+  .order-edit { display:grid; gap:8px; margin-top:10px; max-width:520px; }
+  .order-edit select, .order-edit input, .order-edit textarea { border:1px solid var(--line-strong); background:var(--surface); border-radius:var(--radius); padding:9px 12px; font-size:14px; width:100%; }
+  .order-edit label { font-size:11.5px; font-weight:700; letter-spacing:.06em; text-transform:uppercase; color:var(--muted); }
+
+
+/* ===== ADMIN PASTEL (2026-11-19): matches the storefront pastel identity ===== */
+body{background:#F9ECE7;color:#4A3A36}
+.login-page{background:radial-gradient(700px 480px at 50% 28%,#F6DDD5,#F9ECE7)}
+.login-card{background:#FFF9F5;border:1px solid #F0DCD3;border-radius:14px;box-shadow:0 24px 60px rgba(122,84,72,.14)}
+.lock-circle{background:#B76E79;color:#FFF9F5}
+.login-title{font-family:"Archivo",system-ui,sans-serif;font-weight:700;color:#4A3A36}
+.login-sub{color:#8A7168}
+.brand-title{color:#4A3A36}
+.dash-header{background:#FFF9F5;border-bottom:1px solid #F0DCD3}
+.dash-tabs{gap:6px}
+.tab-btn{border-radius:999px;color:#8A7168;border-color:transparent}
+.tab-btn.active{background:#4A3A36;color:#FFF9F5;border-color:#4A3A36}
+.stat-card{background:#FFF9F5;border:1px solid #F0DCD3;border-radius:12px;box-shadow:none}
+.panel-title{color:#4A3A36}
+.panel-sub{color:#8A7168}
+.btn{border-radius:8px}
+.btn-primary{background:#4A3A36;color:#FFF9F5;border-color:#4A3A36}
+.btn-primary:hover{background:#382B27}
+.btn-quiet{border:1px solid #D8BBAE;color:#4A3A36;background:transparent}
+.mini-btn{border:1px solid #D8BBAE;border-radius:6px;color:#4A3A36;background:#FFF9F5}
+.mini-btn.sold{background:#F6DDD5}
+.field label{color:#6B554E}
+.field input,.field select,.field textarea,.input-wrap input{background:#FFFFFF;border:1px solid #E3C9BE;border-radius:8px;color:#4A3A36}
+.field input:focus,.field select:focus,.field textarea:focus,.input-wrap input:focus{border-color:#B76E79;box-shadow:0 0 0 3px rgba(183,110,121,.18);outline:none}
+.badge{background:#F6DDD5;color:#7A4A52;border-radius:999px}
+.badge-draft{background:#F3E2D3;color:#7A5C50}
+.badge-low{background:#F6DDD5;color:#A34A56}
+.badge-out{background:#E9E2DC;color:#8A7168}
+.status-badge{border-radius:999px}
+.piece-row,.order-item{background:#FFF9F5;border:1px solid #F0DCD3;border-radius:10px}
+.toolbar,.bulk-bar{background:#FFF9F5;border:1px solid #F0DCD3;border-radius:10px}
+.toast{background:#4A3A36;color:#FFF9F5}
+.demo-box{background:#FDF3EE;border:1px dashed #D8BBAE;border-radius:10px}
+.demo-chip{background:#F6DDD5;color:#7A4A52}
+.err-box,.form-err{background:#FBE9E7;color:#A33B47;border-color:#F0C6C0}
+.photo-preview{border:1px solid #F0DCD3;border-radius:8px}
+.back-link{color:#B76E79}
+.eye-toggle{color:#8A7168}
+::selection{background:#B76E79;color:#FFF9F5}
+@media(max-width:640px){.stat-grid{grid-template-columns:1fr 1fr}.dash-tabs{overflow-x:auto;flex-wrap:nowrap}.login-card{margin:14px}}
+
+
+.stat-grid .stat-card:nth-child(8) b{font-size:19px;line-height:1.3}
+</style>
+</head>
 <body>
-<div class="sample-bar"><div class="wrap"><strong>Admin demo · ByteBuildrz sample</strong><span>Demo data saves in this browser only</span></div></div>
-<header class="site"><div class="wrap header-in">
-<a class="brand" href="index.html"><span class="brand-name">Artistry by Sweta J</span><span class="brand-sub">Admin Dashboard</span></a>
-<div><a class="icon-btn" href="index.html">View Site</a></div>
-</div></header>
 
-<div class="wrap" id="login" style="max-width:420px;padding-top:36px">
-<h1 style="font-family:'Cormorant Garamond',serif;font-size:32px;margin:0 0 6px">Seller login</h1>
-<p style="color:var(--muted)">This is the dashboard Sweta gets with the full website: add, edit and hide pieces, change prices, and see every enquiry in one place.</p>
-<div class="field"><label>Email</label><input id="em" value="admin@artistry.in"></div>
-<div class="field"><label>Password</label><input id="pw" type="password" value="sweta2026"></div>
-<button class="btn" style="width:100%" onclick="login()">Login to Dashboard</button>
-<p style="color:var(--muted);font-size:13px">Demo login: admin@artistry.in / sweta2026</p>
-<p id="err" style="color:#9C2B1B;font-weight:700" hidden>Wrong password for this demo. Use sweta2026.</p>
+<div id="adminApp">
+  <!-- Content dynamically swapped via JS (Login view or Dashboard view) -->
 </div>
 
-<div class="wrap" id="dash" hidden style="padding-top:26px">
-<div class="sec-head"><h2>Dashboard</h2><button class="btn ghost" onclick="logout()">Logout</button></div>
-<div class="stats">
-<div class="stat"><b id="st-products">–</b><span>Pieces live</span></div>
-<div class="stat"><b id="st-orders">–</b><span>Enquiries</span></div>
-<div class="stat"><b id="st-value">–</b><span>Enquiry value</span></div>
-<div class="stat"><b id="st-new">–</b><span>New enquiries</span></div>
-</div>
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
 
-<section><div class="sec-head"><h2>Recent enquiries</h2></div><div style="overflow:auto"><table><thead><tr><th>ID</th><th>Buyer</th><th>Items</th><th>Total</th><th>Status</th></tr></thead><tbody id="orders"></tbody></table></div>
-<p style="color:var(--muted);font-size:13px">Statuses: New → Confirmed → Packed → Delivered. In the full website she updates these herself, no developer needed.</p></section>
-
-<section><div class="sec-head"><h2>Pieces & prices</h2><button class="btn ghost" onclick="resetDemo()">Reset demo data</button></div>
-<div style="overflow:auto"><table><thead><tr><th>Piece</th><th>Category</th><th>Price (₹)</th><th>Visible</th></tr></thead><tbody id="prods"></tbody></table></div>
-<p style="color:var(--muted);font-size:13px">Change a price or hide a piece, it saves instantly and the shop updates. Sample prices here; her real prices go in on the live site.</p></section>
-</div>
-
-<footer class="site"><div class="wrap"><span class="brand-name">Artistry by Sweta J</span><p class="copy">Admin demo by ByteBuildrz. Demo only: data lives in this browser.</p></div></footer>
 <script src="store.js"></script>
 <script>
-var STATUSES=["New","Confirmed","Packed","Delivered"];
-function inr(n){return "₹"+Number(n).toLocaleString("en-IN");}
-function login(){var pw=document.getElementById("pw").value;if(pw!==(ARTStore.state.adminPass||"sweta2026")){document.getElementById("err").hidden=false;return;}sessionStorage.setItem("art_admin","1");show();}
-function logout(){sessionStorage.removeItem("art_admin");location.reload();}
-function resetDemo(){ARTStore.reset();render();alert("Demo data reset.");}
-function show(){document.getElementById("login").hidden=true;document.getElementById("dash").hidden=false;render();}
-function render(){var s=ARTStore.state;
-document.getElementById("st-products").textContent=s.products.filter(function(p){return p.visible!==false;}).length;
-document.getElementById("st-orders").textContent=s.orders.length;
-document.getElementById("st-value").textContent=inr(s.orders.reduce(function(a,o){return a+o.total;},0));
-document.getElementById("st-new").textContent=s.orders.filter(function(o){return o.status===0;}).length;
-document.getElementById("orders").innerHTML=s.orders.slice().reverse().map(function(o){return "<tr><td>"+o.id+"</td><td>"+o.who+"</td><td>"+o.item+"</td><td>"+inr(o.total)+"</td><td><span class='pill-s'>"+(STATUSES[o.status]||"New")+"</span></td></tr>";}).join("");
-document.getElementById("prods").innerHTML=s.products.map(function(p,i){return "<tr><td><strong>"+p.name+"</strong></td><td>"+p.catLabel+"</td><td><input type='number' value='"+p.price+"' onchange='setPrice("+i+",this.value)'></td><td><input type='checkbox' "+(p.visible!==false?"checked":"")+" onchange='setVis("+i+",this.checked)' style='width:20px;height:20px'></td></tr>";}).join("");}
-function setPrice(i,v){ARTStore.state.products[i].price=Math.max(0,parseInt(v,10)||0);ARTStore.save();render();}
-function setVis(i,v){ARTStore.state.products[i].visible=v;ARTStore.save();render();}
-if(sessionStorage.getItem("art_admin")==="1")show();
+var BUILTIN_IMGS = {"1": "img/product-1.jpg", "2": "img/product-2.jpg", "3": "img/product-3.jpg", "4": "img/product-4.jpg", "5": "img/product-5.jpg", "6": "img/product-6.jpg", "7": "img/product-7.jpg", "8": "img/product-8.jpg", "9": "img/product-9.jpg"};
+var storeState = LeoraStore.load();
+var PRODUCTS = storeState.products;
+var ADMIN_STATUSES = ["New", "Confirmed", "Packed", "Shipped"];
+var ADMIN_ORDERS = storeState.orders;
+var CAT_LABELS = { decor: "Concrete Decor", candles: "Candles", keepsakes: "Keepsakes & Frames", hampers: "Hampers & Gifts", kits: "DIY Kits" };
+
+var state = {
+  isLoggedIn: false,
+  activeTab: "overview",
+  showPassword: false,
+  loginError: "",
+  isLoading: false,
+  pieceQuery: "",
+  pieceCat: "all",
+  orderQuery: "",
+  selected: {},
+  pendingPhoto: undefined
+};
+
+function inr(n) { return "₹" + n.toLocaleString("en-IN"); }
+
+function toast(msg) {
+  var el = document.getElementById("toast");
+  el.textContent = msg;
+  el.classList.add("show");
+  setTimeout(function() { el.classList.remove("show"); }, 2400);
+}
+
+function renderApp() {
+  var app = document.getElementById("adminApp");
+  if (!state.isLoggedIn) {
+    renderLogin(app);
+  } else {
+    renderDashboard(app);
+  }
+}
+
+function renderLogin(container) {
+  var errHtml = state.loginError ? '<div class="err-box"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>' + state.loginError + '</div>' : '';
+  
+  container.innerHTML = '<div class="login-page">'
+    + '<a href="shop.html" class="back-link">&larr; Back to Shop</a>'
+    + '<div class="login-card">'
+    + '<div class="lock-circle"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg></div>'
+    + '<h1 class="login-title">Seller Admin Login</h1>'
+    + '<p class="login-sub">Sign in to manage ARTISTRY BY SWETA J inventory and orders</p>'
+    + errHtml
+    + '<form id="loginForm">'
+    + '<div class="field"><label for="adminEmail">Email Address</label><div class="input-wrap"><input id="adminEmail" type="email" placeholder="admin@artistry.in" required /></div></div>'
+    + '<div class="field"><label for="adminPassword">Password</label><div class="input-wrap">'
+    + '<input id="adminPassword" type="' + (state.showPassword ? 'text' : 'password') + '" placeholder="Enter password" required />'
+    + '<button type="button" class="eye-toggle" id="eyeToggle" aria-label="Toggle password visibility">'
+    + (state.showPassword ? '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19m-6.72-1.07a3 3 0 1 1-4.24-4.24"/><line x1="1" y1="1" x2="23" y2="23"/></svg>' : '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>')
+    + '</button>'
+    + '</div></div>'
+    + '<button type="submit" class="btn btn-primary btn-full" id="btnSubmit">' + (state.isLoading ? 'Authenticating...' : 'Sign In to Seller Dashboard') + '</button>'
+    + '</form>'
+    + '<div class="demo-box">'
+    + '<strong>Demo Credentials</strong>'
+    + '<div class="demo-creds">admin@artistry.in / artistry2026</div>'
+    + '<button type="button" class="btn btn-quiet btn-full" id="btnAutofill" style="min-height:38px;padding:6px 12px;font-size:13px">Auto-fill Demo Credentials</button>'
+    + '</div>'
+    + '<p class="status-line">Demo Mode: data saves in this browser only. A real backend is still needed for cross-device saving and real orders.</p>'
+    + '</div></div>';
+
+  document.getElementById("eyeToggle").addEventListener("click", function() {
+    state.showPassword = !state.showPassword;
+    var passIn = document.getElementById("adminPassword");
+    passIn.type = state.showPassword ? "text" : "password";
+    this.innerHTML = state.showPassword ? '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19m-6.72-1.07a3 3 0 1 1-4.24-4.24"/><line x1="1" y1="1" x2="23" y2="23"/></svg>' : '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>';
+  });
+
+  document.getElementById("btnAutofill").addEventListener("click", function() {
+    document.getElementById("adminEmail").value = "admin@artistry.in";
+    document.getElementById("adminPassword").value = LeoraStore.load().adminPass;
+    state.loginError = "";
+    var existingErr = container.querySelector(".err-box");
+    if (existingErr) existingErr.remove();
+  });
+
+  document.getElementById("loginForm").addEventListener("submit", function(e) {
+    e.preventDefault();
+    var email = document.getElementById("adminEmail").value.trim();
+    var pass = document.getElementById("adminPassword").value;
+    
+    state.isLoading = true;
+    document.getElementById("btnSubmit").textContent = "Authenticating...";
+    document.getElementById("btnSubmit").disabled = true;
+
+    setTimeout(function() {
+      state.isLoading = false;
+      // Strict credentials check as required by Kurties pattern
+      if (email === "admin@artistry.in" && pass === LeoraStore.load().adminPass) {
+        state.isLoggedIn = true;
+        state.loginError = "";
+        renderApp();
+        toast("Welcome to ARTISTRY BY SWETA J Admin Dashboard (Demo)");
+      } else {
+        state.loginError = "Authentication failed. Please verify credentials.";
+        renderApp();
+      }
+    }, 400);
+  });
+}
+
+function renderDashboard(container) {
+  container.innerHTML = '<header class="dash-header">'
+    + '<div class="wrap dash-head-in">'
+    + '<div><span class="brand-title">ARTISTRY BY SWETA J Admin</span><span class="demo-chip">Demo Mode</span></div>'
+    + '<div class="dash-actions">'
+    + '<a href="shop.html" class="btn btn-quiet" style="font-size:13px;padding:8px 14px">&larr; Back to Shop</a>'
+    + '<button class="btn btn-quiet" id="btnResetDemo" style="font-size:13px;padding:8px 14px">Reset Demo Data</button>'
+    + '<button class="btn btn-quiet" id="btnLogout" style="font-size:13px;padding:8px 14px">Log Out</button>'
+    + '</div></div></header>'
+    + '<div class="wrap dash-shell">'
+    + '<div class="dash-tabs" role="tablist">'
+    + '<button class="tab-btn ' + (state.activeTab==="overview" ? "active" : "") + '" data-tab="overview">Overview</button>'
+    + '<button class="tab-btn ' + (state.activeTab==="pieces" ? "active" : "") + '" data-tab="pieces">Pieces &amp; Stock</button>'
+    + '<button class="tab-btn ' + (state.activeTab==="edit" ? "active" : "") + '" data-tab="edit">Add / Edit Piece</button>'
+    + '<button class="tab-btn ' + (state.activeTab==="orders" ? "active" : "") + '" data-tab="orders">Orders (' + ADMIN_ORDERS.length + ')</button>'
+    + '<button class="tab-btn ' + (state.activeTab==="settings" ? "active" : "") + '" data-tab="settings">Store Settings</button>'
+    + '</div>'
+    + '<div id="panelContent"></div>'
+    + '</div>';
+
+  document.getElementById("btnLogout").addEventListener("click", function() {
+    state.isLoggedIn = false;
+    state.activeTab = "overview";
+    state.loginError = "";
+    renderApp();
+    toast("Logged out successfully");
+  });
+
+  document.getElementById("btnResetDemo").addEventListener("click", function() {
+    if (!confirm("Reset all demo data? Catalogue, orders and settings go back to the original sample data. This cannot be undone.")) return;
+    LeoraStore.reset();
+    storeState = LeoraStore.load();
+    PRODUCTS = storeState.products;
+    ADMIN_ORDERS = storeState.orders;
+    state.selected = {};
+    state.activeTab = "overview";
+    renderApp();
+    toast("Demo data reset to the original sample data");
+  });
+
+  var tabBtns = container.querySelectorAll(".tab-btn");
+  for (var i=0; i<tabBtns.length; i++) {
+    tabBtns[i].addEventListener("click", function() {
+      state.activeTab = this.getAttribute("data-tab");
+      for (var j=0; j<tabBtns.length; j++) {
+        tabBtns[j].classList.toggle("active", tabBtns[j].getAttribute("data-tab") === state.activeTab);
+      }
+      renderActiveTab();
+    });
+  }
+
+  renderActiveTab();
+}
+
+function renderActiveTab() {
+  var panel = document.getElementById("panelContent");
+  if (state.activeTab === "overview") renderOverview(panel);
+  else if (state.activeTab === "pieces") renderPieces(panel);
+  else if (state.activeTab === "edit") renderEdit(panel);
+  else if (state.activeTab === "orders") renderOrders(panel);
+  else if (state.activeTab === "settings") renderSettings(panel);
+}
+
+function renderOverview(panel) {
+  var S = storeState.settings;
+  var th = (S.lowStockThreshold === undefined ? 2 : S.lowStockThreshold);
+  var live=0, sold=0, low=0, units=0, value=0;
+  for (var i=0; i<PRODUCTS.length; i++) {
+    var p = PRODUCTS[i];
+    units += p.stock;
+    value += p.price * p.stock;
+    if (p.stock <= 0) sold++;
+    else { live++; if (p.stock <= th) low++; }
+  }
+  var byStatus = [0,0,0,0];
+  ADMIN_ORDERS.forEach(function(o){ if (byStatus[o.status] !== undefined) byStatus[o.status]++; });
+  var counts = {};
+  ADMIN_ORDERS.forEach(function(o){
+    (o.item || "").split(" · ").forEach(function(seg){
+      var nm = seg.split(" — ")[0].trim();
+      if (nm) counts[nm] = (counts[nm] || 0) + 1;
+    });
+  });
+  var best = Object.keys(counts).map(function(k){ return [k, counts[k]]; }).sort(function(a,b){ return b[1]-a[1]; }).slice(0,5);
+  var statusHtml = ADMIN_STATUSES.map(function(s, idx){
+    return '<div class="stat-card"><b>' + byStatus[idx] + '</b><span>Orders · ' + s + '</span></div>';
+  }).join("");
+  var bestHtml = best.length ? best.map(function(b){ return '<li>' + esc(b[0]) + ' — ' + b[1] + ' in sample orders</li>'; }).join("") : '<li>No orders yet</li>';
+  panel.innerHTML = '<h2 class="panel-title">Overview</h2>'
+    + '<p class="panel-sub">Live snapshot computed from the shared store. Edits here save to this browser and show on the shop pages in the same browser.</p>'
+    + '<div class="stat-grid">'
+    + '<div class="stat-card"><b>' + PRODUCTS.length + '</b><span>Pieces in Catalogue</span></div>'
+    + '<div class="stat-card"><b>' + live + '</b><span>In Stock</span></div>'
+    + '<div class="stat-card"><b>' + sold + '</b><span>Sold Out</span></div>'
+    + '<div class="stat-card"><b>' + ADMIN_ORDERS.length + '</b><span>Sample Orders</span></div>'
+    + '<div class="stat-card"><b>' + units + '</b><span>Total Units Available</span></div>'
+    + '<div class="stat-card"><b>' + low + '</b><span>Low Stock (≤ ' + th + ' left)</span></div>'
+    + '<div class="stat-card"><b>' + inr(value) + '</b><span>Catalogue Value (price × stock)</span></div>'
+    + '<div class="stat-card"><b>This browser</b><span>Saved locally only — a real backend is still needed for cross-device saving and real orders</span></div>'
+    + '</div>'
+    + '<h3 style="margin:26px 0 10px">Orders by status</h3>'
+    + '<div class="stat-grid">' + statusHtml + '</div>'
+    + '<h3 style="margin:26px 0 10px">Best sellers (from sample orders)</h3>'
+    + '<ul style="margin:0;padding-left:18px;color:var(--muted);font-size:14px;line-height:1.7">' + bestHtml + '</ul>'
+    + '<div style="margin-top:28px;padding:18px 20px;background:var(--panel);border-radius:var(--radius);border:1px solid var(--line)">'
+    + '<strong style="color:var(--ink);display:block;margin-bottom:8px">What the paid ₹4,500 build connects:</strong>'
+    + '<ul style="margin:0;padding-left:18px;color:var(--muted);font-size:13.5px;line-height:1.6">'
+    + '<li>Live catalogue database (Supabase), so edits update the shop for every customer immediately</li>'
+    + '<li>Private authenticated login with ARTISTRY BY SWETA J\'s custom secret credentials</li>'
+    + '<li>Direct Instagram DM ordering on every order button (orders are taken on Instagram DM)</li>'
+    + '<li>Photo upload capability for new collections from your phone or laptop</li>'
+    + '<li>Incoming customer order enquiries recorded directly in this dashboard</li>'
+    + '</ul>'
+    + '</div>';
+}
+
+function esc(s) {
+  return String(s === undefined || s === null ? "" : s).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
+}
+function saveStore(msg) {
+  if (LeoraStore.save(storeState)) { if (msg) toast(msg); return true; }
+  toast("Could not save: browser storage is full or blocked. Try removing uploaded photos or use a smaller photo.");
+  return false;
+}
+function pieceImg(p) { return p.img ? p.img : (BUILTIN_IMGS[p.id] || null); }
+function downloadCsv(filename, rows) {
+  var csv = rows.map(function(r){
+    return r.map(function(c){
+      var s = String(c === undefined || c === null ? "" : c);
+      return /[",\n]/.test(s) ? '"' + s.replace(/"/g, '""') + '"' : s;
+    }).join(",");
+  }).join("\n");
+  var blob = new Blob([csv], { type: "text/csv" });
+  var a = document.createElement("a");
+  a.href = URL.createObjectURL(blob);
+  a.download = filename;
+  document.body.appendChild(a); a.click(); a.remove();
+  setTimeout(function(){ URL.revokeObjectURL(a.href); }, 500);
+}
+function handlePhotoFile(file, cb) {
+  if (!file) return;
+  if (!/^image\//.test(file.type || "")) { cb(null, "Please choose an image file for the photo."); return; }
+  var reader = new FileReader();
+  reader.onload = function() {
+    var img = new Image();
+    img.onload = function() {
+      var max = 800, w = img.width, h = img.height;
+      var scale = Math.min(1, max / Math.max(w, h));
+      var cw = Math.max(1, Math.round(w * scale)), ch = Math.max(1, Math.round(h * scale));
+      var c = document.createElement("canvas"); c.width = cw; c.height = ch;
+      c.getContext("2d").drawImage(img, 0, 0, cw, ch);
+      cb(c.toDataURL("image/jpeg", 0.82), null);
+    };
+    img.onerror = function() { cb(null, "That image could not be read. Try another photo."); };
+    img.src = reader.result;
+  };
+  reader.onerror = function() { cb(null, "That file could not be read. Try another photo."); };
+  reader.readAsDataURL(file);
+}
+
+function renderPieces(panel) {
+  var catOpts = '<option value="all">All categories</option>' + Object.keys(CAT_LABELS).map(function(k){
+    return '<option value="' + k + '"' + (state.pieceCat === k ? ' selected' : '') + '>' + CAT_LABELS[k] + '</option>';
+  }).join("");
+  panel.innerHTML = '<h2 class="panel-title">Pieces &amp; Stock</h2>'
+    + '<p class="panel-sub">Manage the catalogue. Every change saves to this browser and shows on the shop pages in the same browser. Draft pieces are hidden from the shop.</p>'
+    + '<div class="toolbar">'
+    + '<input type="search" id="pieceSearch" placeholder="Search pieces..." value="' + esc(state.pieceQuery) + '" />'
+    + '<select id="pieceCat">' + catOpts + '</select>'
+    + '<button type="button" class="btn btn-quiet" id="btnCsvPieces">Export CSV</button>'
+    + '</div>'
+    + '<div class="bulk-bar"><strong>Bulk edit:</strong>'
+    + '<label><input type="checkbox" id="bulkAll" /> Select all shown</label>'
+    + '<input type="number" id="bulkPrice" placeholder="Set price ₹" min="0" />'
+    + '<button type="button" class="mini-btn" id="bulkApplyPrice">Apply price</button>'
+    + '<input type="number" id="bulkStock" placeholder="Set stock" min="0" />'
+    + '<button type="button" class="mini-btn" id="bulkApplyStock">Apply stock</button>'
+    + '<span id="bulkCount"></span>'
+    + '</div>'
+    + '<div id="piecesList"></div>';
+
+  document.getElementById("pieceSearch").addEventListener("input", function(){ state.pieceQuery = this.value; renderPiecesList(); });
+  document.getElementById("pieceCat").addEventListener("change", function(){ state.pieceCat = this.value; renderPiecesList(); });
+  document.getElementById("btnCsvPieces").addEventListener("click", function(){
+    var rows = [["id","name","category","price","mrp","stock","colours","visible"]];
+    PRODUCTS.forEach(function(p){ rows.push([p.id, p.name, p.catLabel, p.price, p.mrp === null ? "" : p.mrp, p.stock, (p.colours || []).join(" / "), p.visible === false ? "draft" : "live"]); });
+    downloadCsv("artistry-pieces.csv", rows);
+    toast("Pieces CSV downloaded");
+  });
+  document.getElementById("bulkAll").addEventListener("change", function(){
+    var on = this.checked;
+    filteredPieces().forEach(function(p){ state.selected[p.id] = on; });
+    renderPiecesList();
+  });
+  function bulkApply(field, inputId) {
+    var ids = Object.keys(state.selected).filter(function(k){ return state.selected[k]; });
+    if (!ids.length) { toast("Select at least one piece first"); return; }
+    var v = parseInt(document.getElementById(inputId).value, 10);
+    if (isNaN(v) || v < 0) { toast("Enter a valid number for bulk edit"); return; }
+    ids.forEach(function(k){ var p = byId(parseInt(k, 10)); if (p) p[field] = v; });
+    if (saveStore("Bulk " + field + " updated for " + ids.length + " piece(s)")) renderPiecesList();
+  }
+  document.getElementById("bulkApplyPrice").addEventListener("click", function(){ bulkApply("price", "bulkPrice"); });
+  document.getElementById("bulkApplyStock").addEventListener("click", function(){ bulkApply("stock", "bulkStock"); });
+  renderPiecesList();
+}
+
+function filteredPieces() {
+  var q = state.pieceQuery.trim().toLowerCase();
+  return PRODUCTS.filter(function(p){
+    if (state.pieceCat !== "all" && p.cat !== state.pieceCat) return false;
+    if (q && (p.name + " " + p.catLabel + " " + (p.colours || []).join(" ")).toLowerCase().indexOf(q) === -1) return false;
+    return true;
+  });
+}
+
+function renderPiecesList() {
+  var list = document.getElementById("piecesList");
+  if (!list) return;
+  var th = (storeState.settings.lowStockThreshold === undefined ? 2 : storeState.settings.lowStockThreshold);
+  var items = filteredPieces();
+  var bc = document.getElementById("bulkCount");
+  if (bc) { var n = Object.keys(state.selected).filter(function(k){ return state.selected[k]; }).length; bc.textContent = n ? n + " selected" : ""; }
+  if (!items.length) { list.innerHTML = '<p class="panel-sub">No pieces match your search.</p>'; return; }
+  list.innerHTML = items.map(function(p) {
+    var src = pieceImg(p);
+    var imgHtml = src ? '<img src="' + src + '" alt="' + esc(p.alt || p.name) + '" />' : '<div class="piece-ph">' + esc(p.name) + '</div>';
+    var badges = '';
+    if (p.visible === false) badges += ' <span class="badge badge-draft">Draft</span>';
+    if (p.stock <= 0) badges += ' <span class="badge badge-out">Sold out</span>';
+    else if (p.stock <= th) badges += ' <span class="badge badge-low">Low stock · only ' + p.stock + ' left</span>';
+    var stockText = p.stock <= 0 ? '<span style="color:var(--danger);font-weight:700">Sold out</span>' : (p.stock <= th ? '<span style="color:var(--accent);font-weight:700">Only ' + p.stock + ' left</span>' : '<span style="color:var(--gold-deep);font-weight:700">In stock (' + p.stock + ')</span>');
+    return '<div class="piece-row">'
+      + imgHtml
+      + '<div class="piece-info">'
+      + '<h4><label style="font-family:inherit;font-size:14px"><input type="checkbox" data-sel="' + p.id + '"' + (state.selected[p.id] ? ' checked' : '') + ' /> </label>' + esc(p.name) + badges + '</h4>'
+      + '<p class="piece-meta">' + esc(p.catLabel) + ' · ' + inr(p.price) + (p.mrp ? ' (MRP ' + inr(p.mrp) + ')' : '') + ' · Colours: ' + esc((p.colours || []).join(", ")) + '</p>'
+      + '<p style="font-size:12.5px;margin:2px 0 0">' + stockText + '</p>'
+      + '<div class="piece-actions">'
+      + '<span class="stock-stepper">'
+      + '<button type="button" data-dec="' + p.id + '" aria-label="Decrease">&minus;</button>'
+      + '<span>Stock: ' + p.stock + '</span>'
+      + '<button type="button" data-inc="' + p.id + '" aria-label="Increase">+</button>'
+      + '</span>'
+      + '<button type="button" class="mini-btn ' + (p.stock<=0 ? 'sold' : '') + '" data-sold="' + p.id + '">' + (p.stock<=0 ? 'Restock' : 'Mark Sold Out') + '</button>'
+      + '<button type="button" class="mini-btn" data-vis="' + p.id + '">' + (p.visible === false ? 'Publish' : 'Move to Draft') + '</button>'
+      + '<button type="button" class="mini-btn" data-edit="' + p.id + '">Edit</button>'
+      + '<button type="button" class="mini-btn" data-del="' + p.id + '">Delete</button>'
+      + '</div></div></div>';
+  }).join("");
+
+  function bind(attr, fn) {
+    var els = list.querySelectorAll("[" + attr + "]");
+    for (var i=0; i<els.length; i++) els[i].addEventListener("click", function(){ fn(parseInt(this.getAttribute(attr), 10)); });
+  }
+  var sels = list.querySelectorAll("[data-sel]");
+  for (var s=0; s<sels.length; s++) sels[s].addEventListener("change", function(){ state.selected[this.getAttribute("data-sel")] = this.checked; renderPiecesList(); });
+  bind("data-dec", function(id){ var p = byId(id); if (p && p.stock > 0) { p.stock--; if (saveStore(p.name + " stock decreased to " + p.stock)) renderPiecesList(); } });
+  bind("data-inc", function(id){ var p = byId(id); if (p) { p.stock++; if (saveStore(p.name + " stock increased to " + p.stock)) renderPiecesList(); } });
+  bind("data-sold", function(id){ var p = byId(id); if (!p) return; if (p.stock > 0) { p._prevStock = p.stock; p.stock = 0; } else { p.stock = p._prevStock || 3; } if (saveStore(p.name + (p.stock <= 0 ? " marked sold out" : " restocked to " + p.stock))) renderPiecesList(); });
+  bind("data-vis", function(id){ var p = byId(id); if (!p) return; p.visible = (p.visible === false); if (saveStore(p.name + (p.visible ? " is now live in the shop" : " moved to draft — hidden from the shop"))) renderPiecesList(); });
+  bind("data-del", function(id){ var p = byId(id); if (!p) return; if (!confirm("Delete " + p.name + " from the catalogue? This cannot be undone.")) return; var idx = PRODUCTS.indexOf(p); if (idx !== -1) PRODUCTS.splice(idx, 1); delete state.selected[id]; if (saveStore(p.name + " deleted")) renderPiecesList(); });
+  bind("data-edit", function(id){ state.editPieceId = id; state.activeTab = "edit"; var tabBtns = document.querySelectorAll(".tab-btn"); for (var t=0; t<tabBtns.length; t++) tabBtns[t].classList.toggle("active", tabBtns[t].getAttribute("data-tab") === "edit"); renderActiveTab(); });
+}
+
+function byId(id) {
+  for (var i=0; i<PRODUCTS.length; i++) {
+    if (PRODUCTS[i].id === id) return PRODUCTS[i];
+  }
+  return null;
+}
+
+function renderEdit(panel) {
+  panel.innerHTML = '<h2 class="panel-title">Add / Edit Piece</h2>'
+    + '<p class="panel-sub">Update catalogue pieces or add new ones. Changes save to this browser and show on the shop pages in the same browser. A piece with no photo shows a plain placeholder block with its name — never another piece\'s photo.</p>'
+    + '<form class="admin-form" id="editForm">'
+    + '<div class="field"><label for="peSelect">Select Piece to Edit</label><select id="peSelect"></select></div>'
+    + '<div class="field"><label for="peName">Piece Name</label><input id="peName" type="text" required /></div>'
+    + '<div class="form-row">'
+    + '<div class="field"><label for="pePrice">Price (₹)</label><input id="pePrice" type="number" min="0" required /></div>'
+    + '<div class="field"><label for="peMrp">MRP (₹, optional)</label><input id="peMrp" type="number" min="0" placeholder="Leave blank for none" /></div>'
+    + '</div>'
+    + '<div class="form-row">'
+    + '<div class="field"><label for="peStock">Stock Quantity</label><input id="peStock" type="number" min="0" required /></div>'
+    + '<div class="field"><label for="peCat">Category</label><select id="peCat"><option value="decor">Concrete Decor</option><option value="candles">Candles</option><option value="keepsakes">Keepsakes &amp; Frames</option><option value="hampers">Hampers &amp; Gifts</option><option value="kits">DIY Kits</option></select></div>'
+    + '</div>'
+    + '<div class="field"><label for="peCatLabel">Category Label</label><input id="peCatLabel" type="text" /></div>'
+    + '<div class="field"><label for="peColours">Colours (comma separated)</label><input id="peColours" type="text" placeholder="e.g. Black, Tan, Ivory" required /></div>'
+    + '<div class="field"><label for="peDesc">Description</label><textarea id="peDesc" rows="3"></textarea></div>'
+    + '<div class="form-row">'
+    + '<div class="field"><label for="peMaterial">Material</label><input id="peMaterial" type="text" /></div>'
+    + '<div class="field"><label for="peTag">Tag</label><input id="peTag" type="text" placeholder="e.g. Bestseller" /></div>'
+    + '</div>'
+    + '<div class="form-row">'
+    + '<div class="field"><label for="peNew">New In</label><select id="peNew"><option value="no">No</option><option value="yes">Yes</option></select></div>'
+    + '<div class="field"><label for="peVisible">Visibility</label><select id="peVisible"><option value="live">Live in shop</option><option value="draft">Draft (hidden from shop)</option></select></div>'
+    + '</div>'
+    + '<div class="field"><label for="pePhoto">Photo (upload replaces the photo; downscaled to max 800px before saving)</label>'
+    + '<input id="pePhoto" type="file" accept="image/*" />'
+    + '<div style="margin-top:10px" id="pePhotoPreview"></div>'
+    + '<button type="button" class="mini-btn" id="btnRemovePhoto" style="margin-top:8px">Remove uploaded photo</button>'
+    + '</div>'
+    + '<div class="form-err" id="peErr"></div>'
+    + '<div style="display:flex;gap:10px;margin-top:8px">'
+    + '<button type="submit" class="btn btn-primary" id="btnSavePiece">Save Piece</button>'
+    + '</div>'
+    + '</form>';
+
+  var selectEl = document.getElementById("peSelect");
+  function refreshSelectOptions() {
+    selectEl.innerHTML = PRODUCTS.map(function(p) {
+      return '<option value="' + p.id + '">' + esc(p.name) + (p.visible === false ? ' (Draft)' : '') + '</option>';
+    }).join("") + '<option value="new">+ Add a new piece...</option>';
+  }
+  refreshSelectOptions();
+  if (state.editPieceId) { selectEl.value = String(state.editPieceId); state.editPieceId = null; }
+
+  function showErr(msg) {
+    var e = document.getElementById("peErr");
+    if (msg) { e.textContent = msg; e.style.display = "block"; } else { e.textContent = ""; e.style.display = "none"; }
+  }
+  function currentPiece() { return selectEl.value === "new" ? null : byId(parseInt(selectEl.value, 10)); }
+  function renderPhotoPreview() {
+    var box = document.getElementById("pePhotoPreview");
+    var src = null;
+    if (state.pendingPhoto !== undefined) src = state.pendingPhoto || null;
+    else { var p = currentPiece(); src = p ? pieceImg(p) : null; }
+    box.innerHTML = src ? '<img class="photo-preview" src="' + src + '" alt="Piece photo preview" />' : '<div class="piece-ph" style="width:96px;height:96px">' + esc(document.getElementById("peName").value || "No photo") + '</div><p class="piece-meta">No photo — a plain placeholder block with the piece name is shown.</p>';
+  }
+  function fillFields() {
+    state.pendingPhoto = undefined;
+    showErr("");
+    document.getElementById("pePhoto").value = "";
+    var p = currentPiece();
+    if (!p) {
+      document.getElementById("peName").value = "";
+      document.getElementById("pePrice").value = "";
+      document.getElementById("peMrp").value = "";
+      document.getElementById("peStock").value = "4";
+      document.getElementById("peCat").value = "decor";
+      document.getElementById("peCatLabel").value = CAT_LABELS["decor"];
+      document.getElementById("peColours").value = "As shown";
+      document.getElementById("peDesc").value = "";
+      document.getElementById("peMaterial").value = "Handmade";
+      document.getElementById("peTag").value = "New In";
+      document.getElementById("peNew").value = "yes";
+      document.getElementById("peVisible").value = "live";
+    } else {
+      document.getElementById("peName").value = p.name;
+      document.getElementById("pePrice").value = p.price;
+      document.getElementById("peMrp").value = (p.mrp === null || p.mrp === undefined) ? "" : p.mrp;
+      document.getElementById("peStock").value = p.stock;
+      document.getElementById("peCat").value = p.cat;
+      document.getElementById("peCatLabel").value = p.catLabel || CAT_LABELS[p.cat] || "";
+      document.getElementById("peColours").value = (p.colours || []).join(", ");
+      document.getElementById("peDesc").value = p.desc || "";
+      document.getElementById("peMaterial").value = p.material || "";
+      document.getElementById("peTag").value = p.tag || "";
+      document.getElementById("peNew").value = p.isNew ? "yes" : "no";
+      document.getElementById("peVisible").value = p.visible === false ? "draft" : "live";
+    }
+    renderPhotoPreview();
+  }
+  selectEl.addEventListener("change", fillFields);
+  document.getElementById("peCat").addEventListener("change", function(){ document.getElementById("peCatLabel").value = CAT_LABELS[this.value] || "Handmade piece"; });
+  document.getElementById("pePhoto").addEventListener("change", function() {
+    var file = this.files && this.files[0];
+    if (!file) return;
+    handlePhotoFile(file, function(dataUrl, err) {
+      if (err) { showErr(err); return; }
+      state.pendingPhoto = dataUrl;
+      showErr("");
+      renderPhotoPreview();
+      toast("Photo ready — it will be saved with the piece");
+    });
+  });
+  document.getElementById("btnRemovePhoto").addEventListener("click", function() {
+    state.pendingPhoto = "";
+    document.getElementById("pePhoto").value = "";
+    renderPhotoPreview();
+  });
+  fillFields();
+
+  document.getElementById("editForm").addEventListener("submit", function(e) {
+    e.preventDefault();
+    var name = document.getElementById("peName").value.trim();
+    var price = parseInt(document.getElementById("pePrice").value, 10);
+    var mrpRaw = document.getElementById("peMrp").value.trim();
+    var mrp = mrpRaw === "" ? null : parseInt(mrpRaw, 10);
+    var stock = parseInt(document.getElementById("peStock").value, 10);
+    var cat = document.getElementById("peCat").value;
+    var colours = document.getElementById("peColours").value.split(",").map(function(s) { return s.trim(); }).filter(Boolean);
+    if (!name || isNaN(price)) { showErr("Please provide a piece name and a valid price."); return; }
+    if (mrp !== null && (isNaN(mrp) || mrp < 0)) { showErr("MRP must be a valid number, or left blank."); return; }
+    if (isNaN(stock) || stock < 0) { showErr("Stock must be 0 or more."); return; }
+    var fields = {
+      name: name, price: price, mrp: mrp, stock: stock, cat: cat,
+      catLabel: document.getElementById("peCatLabel").value.trim() || CAT_LABELS[cat] || "Handmade piece",
+      colours: colours.length ? colours : ["As shown"],
+      desc: document.getElementById("peDesc").value.trim(),
+      material: document.getElementById("peMaterial").value.trim() || "Handmade",
+      tag: document.getElementById("peTag").value.trim(),
+      isNew: document.getElementById("peNew").value === "yes",
+      visible: document.getElementById("peVisible").value !== "draft"
+    };
+    fields.sizes = fields.colours.slice();
+    fields.fabric = fields.material;
+    var p = currentPiece();
+    if (!p) {
+      var maxId = 0;
+      for (var i=0; i<PRODUCTS.length; i++) { if (PRODUCTS[i].id > maxId) maxId = PRODUCTS[i].id; }
+      p = { id: maxId + 1, alt: "Photo of " + name, set: "Shoulder strap", img: null };
+      for (var k in fields) p[k] = fields[k];
+      if (state.pendingPhoto) p.img = state.pendingPhoto;
+      PRODUCTS.push(p);
+      if (!saveStore(name + " added to the catalogue")) { PRODUCTS.splice(PRODUCTS.indexOf(p), 1); showErr("Could not save: browser storage is full or blocked. The photo may be too large — try a smaller photo."); return; }
+      state.pendingPhoto = undefined;
+      refreshSelectOptions();
+      selectEl.value = String(p.id);
+      fillFields();
+    } else {
+      var backup = {};
+      for (var k2 in fields) backup[k2] = p[k2];
+      var oldImg = p.img;
+      for (var k3 in fields) p[k3] = fields[k3];
+      if (state.pendingPhoto !== undefined) p.img = state.pendingPhoto || null;
+      if (!saveStore(p.name + " updated successfully")) { for (var k4 in fields) p[k4] = backup[k4]; p.img = oldImg; showErr("Could not save: browser storage is full or blocked. The photo may be too large — try a smaller photo."); return; }
+      state.pendingPhoto = undefined;
+      refreshSelectOptions();
+      selectEl.value = String(p.id);
+      fillFields();
+    }
+  });
+}
+
+function renderOrders(panel) {
+  panel.innerHTML = '<h2 class="panel-title">Sample Orders</h2>'
+    + '<p class="panel-sub">Orders are taken on Instagram DM only. Advance each order across New, Confirmed, Packed and Shipped, and set payment, delivery and notes. Everything saves to this browser.</p>'
+    + '<div class="toolbar">'
+    + '<input type="search" id="orderSearch" placeholder="Search orders by ref, buyer, city or piece..." value="' + esc(state.orderQuery) + '" />'
+    + '<button type="button" class="btn btn-quiet" id="btnCsvOrders">Export CSV</button>'
+    + '</div>'
+    + '<div id="ordersList"></div>';
+  document.getElementById("orderSearch").addEventListener("input", function(){ state.orderQuery = this.value; renderOrdersList(); });
+  document.getElementById("btnCsvOrders").addEventListener("click", function(){
+    var rows = [["id","ref","buyer","phone","city","pincode","item","total","status","payment","delivery","notes"]];
+    ADMIN_ORDERS.forEach(function(o){ rows.push([o.id, o.ref, o.who, o.phone || "", o.city || "", o.pincode || "", o.item, o.total, ADMIN_STATUSES[o.status], o.payment || "Unpaid", o.delivery || "", o.notes || ""]); });
+    downloadCsv("artistry-orders.csv", rows);
+    toast("Orders CSV downloaded");
+  });
+  renderOrdersList();
+}
+
+function renderOrdersList() {
+  var list = document.getElementById("ordersList");
+  if (!list) return;
+  var q = state.orderQuery.trim().toLowerCase();
+  var items = ADMIN_ORDERS.filter(function(o){
+    if (!q) return true;
+    return (o.id + " " + o.ref + " " + o.who + " " + (o.city || "") + " " + o.item).toLowerCase().indexOf(q) !== -1;
+  });
+  if (!items.length) { list.innerHTML = '<p class="panel-sub">No orders match your search.</p>'; return; }
+  list.innerHTML = items.map(function(o) {
+    var idx = ADMIN_ORDERS.indexOf(o);
+    var nextStatus = o.status < ADMIN_STATUSES.length - 1 ? "Move to " + ADMIN_STATUSES[o.status + 1] : "Reset to New";
+    var payOpts = ["Unpaid", "Advance paid", "Paid"].map(function(v){ return '<option value="' + v + '"' + ((o.payment || "Unpaid") === v ? ' selected' : '') + '>' + v + '</option>'; }).join("");
+    var statusOpts = ADMIN_STATUSES.map(function(s, si){ return '<option value="' + si + '"' + (o.status === si ? ' selected' : '') + '>' + s + '</option>'; }).join("");
+    var contact = [o.phone, o.city, o.pincode].filter(Boolean).join(" · ");
+    return '<div class="order-item">'
+      + '<h4>' + esc(o.id) + ' · ' + esc(o.ref) + ' · ' + inr(o.total) + '</h4>'
+      + '<p>' + esc(o.who) + (contact ? ' · ' + esc(contact) : '') + '</p>'
+      + '<p style="color:var(--ink)">' + esc(o.item) + '</p>'
+      + '<div style="display:flex;align-items:center;gap:10px;margin-top:8px;flex-wrap:wrap">'
+      + '<span class="status-badge">' + ADMIN_STATUSES[o.status] + '</span>'
+      + '<button type="button" class="mini-btn" data-adv="' + idx + '">' + nextStatus + '</button>'
+      + '</div>'
+      + '<div class="order-edit">'
+      + '<label>Order status <select data-ostatus="' + idx + '">' + statusOpts + '</select></label>'
+      + '<label>Payment <select data-opay="' + idx + '">' + payOpts + '</select></label>'
+      + '<label>Delivery status / note <input type="text" data-odelivery="' + idx + '" value="' + esc(o.delivery || "") + '" placeholder="e.g. Handed to courier, tracking on Instagram DM" /></label>'
+      + '<label>Notes <textarea rows="2" data-onotes="' + idx + '" placeholder="Internal notes for this order">' + esc(o.notes || "") + '</textarea></label>'
+      + '<button type="button" class="mini-btn" data-osave="' + idx + '" style="justify-self:start">Save delivery &amp; notes</button>'
+      + '</div></div>';
+  }).join("");
+
+  function bindChange(attr, fn) {
+    var els = list.querySelectorAll("[" + attr + "]");
+    for (var i=0; i<els.length; i++) els[i].addEventListener("change", function(){ fn(parseInt(this.getAttribute(attr), 10), this); });
+  }
+  bindChange("data-ostatus", function(idx, el){ var o = ADMIN_ORDERS[idx]; o.status = parseInt(el.value, 10) || 0; if (saveStore(o.ref + " status: " + ADMIN_STATUSES[o.status])) renderOrdersList(); });
+  bindChange("data-opay", function(idx, el){ var o = ADMIN_ORDERS[idx]; o.payment = el.value; if (saveStore(o.ref + " payment: " + o.payment)) renderOrdersList(); });
+  var advs = list.querySelectorAll("[data-adv]");
+  for (var a=0; a<advs.length; a++) advs[a].addEventListener("click", function(){ var o = ADMIN_ORDERS[parseInt(this.getAttribute("data-adv"), 10)]; o.status = (o.status + 1) % ADMIN_STATUSES.length; if (saveStore(o.ref + " status updated to " + ADMIN_STATUSES[o.status])) renderOrdersList(); });
+  var saves = list.querySelectorAll("[data-osave]");
+  for (var s2=0; s2<saves.length; s2++) saves[s2].addEventListener("click", function(){
+    var idx = parseInt(this.getAttribute("data-osave"), 10);
+    var o = ADMIN_ORDERS[idx];
+    var d = list.querySelector('[data-odelivery="' + idx + '"]');
+    var n = list.querySelector('[data-onotes="' + idx + '"]');
+    if (d) o.delivery = d.value.trim();
+    if (n) o.notes = n.value.trim();
+    saveStore(o.ref + " delivery and notes saved");
+  });
+}
+
+function renderSettings(panel) {
+  var S = storeState.settings;
+  panel.innerHTML = '<h2 class="panel-title">Store Settings</h2>'
+    + '<p class="panel-sub">Customer-facing storefront details. These save to this browser and the shop pages read them from the same store. Demo only: data persists in this browser only; a real backend is still needed for cross-device saving and real orders.</p>'
+    + '<form class="admin-form" id="settingsForm">'
+    + '<div class="field"><label for="setShopName">Shop Name</label><input id="setShopName" type="text" value="' + esc(S.shopName || "ARTISTRY BY SWETA J") + '" /></div>'
+    + '<div class="field"><label for="setInsta">Instagram Profile (orders are taken on Instagram DM)</label><input id="setInsta" type="text" value="' + esc(S.instagram || "@artistrybyswetaj") + '" /></div>'
+    + '<div class="field"><label for="setDelivery">Delivery Note</label><textarea id="setDelivery" rows="2">' + esc(S.deliveryNote || "") + '</textarea></div>'
+    + '<div class="field"><label for="setTagline">Brand Tagline</label><input id="setTagline" type="text" value="' + esc(S.tagline || "") + '" /></div>'
+    + '<div class="form-row">'
+    + '<div class="field"><label for="setLow">Low-stock threshold</label><input id="setLow" type="number" min="0" value="' + (S.lowStockThreshold === undefined ? 2 : S.lowStockThreshold) + '" /></div>'
+    + '<div class="field"><label for="setHero">Hero picks (piece IDs, comma separated)</label><input id="setHero" type="text" value="' + esc((S.heroPicks || []).join(", ")) + '" /></div>'
+    + '</div>'
+    + '<button type="submit" class="btn btn-primary" style="justify-self:start">Save Settings</button>'
+    + '</form>'
+    + '<form class="admin-form" id="passForm" style="margin-top:34px">'
+    + '<h3 style="margin:0">Change Admin Password (demo only — stored in this browser)</h3>'
+    + '<div class="field"><label for="passCurrent">Current Password</label><input id="passCurrent" type="password" required /></div>'
+    + '<div class="field"><label for="passNew">New Password</label><input id="passNew" type="password" required /></div>'
+    + '<div class="form-err" id="passErr"></div>'
+    + '<button type="submit" class="btn btn-quiet" style="justify-self:start">Change Password</button>'
+    + '</form>'
+    + '<div style="margin-top:34px;padding:18px 20px;background:var(--panel);border-radius:var(--radius);border:1px solid var(--line);max-width:540px">'
+    + '<strong style="display:block;margin-bottom:6px">Reset demo data</strong>'
+    + '<p style="margin:0 0 12px;color:var(--muted);font-size:13.5px">Restores the original sample catalogue, the 4 sample orders and the default settings, and clears every edit made in this browser.</p>'
+    + '<button type="button" class="btn btn-quiet" id="btnResetSettings">Reset Demo Data</button>'
+    + '</div>';
+
+  document.getElementById("settingsForm").addEventListener("submit", function(e) {
+    e.preventDefault();
+    S.shopName = document.getElementById("setShopName").value.trim() || "ARTISTRY BY SWETA J";
+    S.instagram = document.getElementById("setInsta").value.trim() || "@artistrybyswetaj";
+    S.deliveryNote = document.getElementById("setDelivery").value.trim();
+    S.tagline = document.getElementById("setTagline").value.trim();
+    var low = parseInt(document.getElementById("setLow").value, 10);
+    S.lowStockThreshold = isNaN(low) || low < 0 ? 2 : low;
+    S.heroPicks = document.getElementById("setHero").value.split(",").map(function(s){ return parseInt(s.trim(), 10); }).filter(function(n){ return !isNaN(n); });
+    saveStore("Settings saved — the shop pages in this browser now use them");
+  });
+
+  document.getElementById("passForm").addEventListener("submit", function(e) {
+    e.preventDefault();
+    var err = document.getElementById("passErr");
+    var cur = document.getElementById("passCurrent").value;
+    var nw = document.getElementById("passNew").value;
+    if (cur !== storeState.adminPass) { err.textContent = "Current password is wrong. Password not changed."; err.style.display = "block"; return; }
+    if (!nw || nw.length < 6) { err.textContent = "New password must be at least 6 characters."; err.style.display = "block"; return; }
+    storeState.adminPass = nw;
+    if (saveStore("Admin password changed (demo only, stored in this browser)")) { err.style.display = "none"; document.getElementById("passCurrent").value = ""; document.getElementById("passNew").value = ""; }
+  });
+
+  document.getElementById("btnResetSettings").addEventListener("click", function() {
+    if (!confirm("Reset all demo data? Catalogue, orders and settings go back to the original sample data. This cannot be undone.")) return;
+    LeoraStore.reset();
+    storeState = LeoraStore.load();
+    PRODUCTS = storeState.products;
+    ADMIN_ORDERS = storeState.orders;
+    state.selected = {};
+    state.activeTab = "overview";
+    renderApp();
+    toast("Demo data reset to the original sample data");
+  });
+}
+
+// Initialize
+renderApp();
 </script>
-</body></html>
+</body>
+</html>
