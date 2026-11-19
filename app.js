@@ -9,7 +9,7 @@ function saveBag(){try{localStorage.setItem("art_bag_v1",JSON.stringify(bag));}c
 function products(){return (window.ART_PRODUCTS||[]).filter(function(p){return p.visible!==false;});}
 function byId(id){return products().filter(function(p){return p.id===Number(id);})[0];}
 window.ARTbyId=byId;window.ARTproducts=products;
-function card(p){return '<article class="card"><a class="ph" href="product.html?id='+p.id+'"><img src="'+p.img+'" alt="'+esc(p.alt)+'"><span class="tag">'+esc(p.tag)+'</span></a><div class="card-body"><span class="card-cat">'+esc(p.catLabel)+'</span><a class="card-name" href="product.html?id='+p.id+'">'+esc(p.name)+'</a><span class="card-price">'+inr(p.price)+' <small>· sample price</small></span><div class="card-actions"><button class="btn-add" data-add="'+p.id+'">Add to Bag</button><a class="btn-view" href="product.html?id='+p.id+'">View</a></div></div></article>';}
+function card(p){return '<article class="card"><a class="ph" href="product.html?id='+p.id+'"><img src="'+p.img+'" alt="'+esc(p.alt)+'"></a><div class="card-body"><a class="card-name" href="product.html?id='+p.id+'">'+esc(p.name)+'</a><span class="card-price">'+inr(p.price)+'</span><button class="btn-add" data-add="'+p.id+'">Add to Bag</button></div></article>';}
 window.ARTcard=card;
 function toast(msg){var t=document.querySelector(".toast");if(!t){t=document.createElement("div");t.className="toast";document.body.appendChild(t);}t.textContent=msg;t.classList.add("show");setTimeout(function(){t.classList.remove("show");},1900);}
 window.ARTtoast=toast;
@@ -40,7 +40,7 @@ document.addEventListener("DOMContentLoaded",renderBag);
 })();
 
 /* Reveal motion (design system: one entrance, JS-set initial state so no-JS keeps content visible) */
-(function(){if(!("IntersectionObserver" in window))return;var els=[];function collect(){document.querySelectorAll("section,.card,.notes figure,.index-list a,.step,.banner,.hero-img").forEach(function(e){if(!e.dataset.rv){e.dataset.rv="1";e.classList.add("rv-init");els.push(e);}});}
+(function(){if(!("IntersectionObserver" in window))return;var els=[];function collect(){document.querySelectorAll("section,.card,.cat,.strip figure,.hero-img").forEach(function(e){if(!e.dataset.rv){e.dataset.rv="1";e.classList.add("rv-init");els.push(e);}});}
 var io=new IntersectionObserver(function(es){es.forEach(function(en){if(en.isIntersecting){en.target.classList.add("rv-in");io.unobserve(en.target);}});},{threshold:.08});
 function init(){collect();els.forEach(function(e,i){e.style.transitionDelay=(Math.min(i%4,3)*70)+"ms";io.observe(e);});}
 if(document.readyState==="loading"){document.addEventListener("DOMContentLoaded",init);}else{init();}
